@@ -1,11 +1,10 @@
 <?php
-
 // membutuhkan pemanggilan akses koneksi (mysql)
-// (DISI)
+require "koneksi.php";
 
-// menjalankan session
-// (DISI)
- 
+// menjalankan sessions
+session_start();
+
 // check apakah session email sudah ada atau belum.
 // jika belum maka akan diredirect ke halaman index (login)
 if( empty($_SESSION['uname']) ){
@@ -28,8 +27,8 @@ if(isset($_POST['tambah'])){
     $judul = mysqli_real_escape_string($db, $_POST['judul']);
     $deskripsi = mysqli_real_escape_string($db, $_POST['deskripsi']);
 
-    //pengecekan gambar
-    if(in_array($ekstensi, $ekstensi_diperbolehkan) === true){
+    //pengecekan gambar "=== true"
+    if(in_array($ekstensi, $ekstensi_diperbolehkan)){
         if($ukuran < 1222044070){			
             move_uploaded_file($file_tmp, 'img/'.$urlgambar);
 
